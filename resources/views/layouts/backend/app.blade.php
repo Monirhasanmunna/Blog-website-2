@@ -67,11 +67,11 @@
     </div>
     <!-- #END# Search Bar -->
     <!-- Top Bar -->
-    @include('admin.partial.topbar')
+    @include('layouts.backend.partial.topbar')
     <!-- #Top Bar -->
     <section>
         <!-- Left Sidebar -->
-       @include('admin.partial.sidebar')
+       @include('layouts.backend.partial.sidebar')
         <!-- #END# Left Sidebar -->
     </section>
 

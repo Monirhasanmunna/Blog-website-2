@@ -1,5 +1,15 @@
 ﻿/* Navbar ====================================== */
 @import url(materialize.css);
+
+
+
+/* My css here */
+.material-icons {
+  color: blue;
+}
+
+
+
 .navbar {
   font-family: "Roboto", sans-serif;
   -webkit-border-radius: 0;
