@@ -33,6 +33,11 @@
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{asset('backend/css/themes/all-themes.css')}}" rel="stylesheet" />
 
+    {{-- Notification Toster --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    @yield('css')
+
    
 </head>
 <body class="theme-blue">
@@ -120,5 +125,20 @@
 
     <!-- Demo Js -->
     <script src="{{asset('backend/js/demo.js')}}"></script>
+
+    {{-- Notification toster js --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        @if (session()->has('success'))
+          toastr.success("{!! session()->get('success')!!}");
+        @endif
+      
+      $(document).ready(function () {
+        bsCustomFileInput.init()
+      })
+      
+      </script>
+
+    @yield('script')
 </body>
 </html>

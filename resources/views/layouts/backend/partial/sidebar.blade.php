@@ -41,8 +41,14 @@
                 </a>
             </li>
 
-            <li class="header">System</li>
+            <li class="{{Request::is('admin/tag','admin/tag/create') ? 'active' : ''}}">
+                <a href="{{route('admin.tag.index')}}">
+                    <i class="material-icons">label</i>
+                    <span>Tag</span>
+                </a>
+            </li>
 
+            <li class="header">System</li>
 
             @endif
 
