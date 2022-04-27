@@ -48,6 +48,13 @@
                 </a>
             </li>
 
+            <li class="{{Request::is('admin/category','admin/category/create') ? 'active' : ''}}">
+                <a href="{{route('admin.category.index')}}">
+                    <i class="material-icons">view_list</i>
+                    <span>Category</span>
+                </a>
+            </li>
+
             <li class="header">System</li>
 
             @endif
