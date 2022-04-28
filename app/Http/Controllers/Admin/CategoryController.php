@@ -112,7 +112,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = Category::find($id);
+        return view('admin.categories.edit',compact('categories'));
     }
 
     /**
@@ -124,7 +125,67 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'image' => 'sometimes|mimes:jpeg,png,jpg',
+        ]);
+
+        $image = $request->file('image');
+        $slug = Str::slug($request->name);
+        $categories = Category::find($id);
+
+        if(isset($image))
+        {
+            // make unique name for image
+            $currentDate = Carbon::now()->toDateString();
+            $imageName = $slug.'-'. uniqid().'.'.$image->getClientOriginalExtension();
+
+            // Check Category Derectory is Exist
+            if(!Storage::disk('public')->exists('category'))
+            {
+                Storage::disk('public')->makeDirectory('category');
+            }
+
+            // delete category old image
+            if(Storage::disk('public')->exists('category/'.$categories->image))
+            {
+                Storage::disk('public')->delete('category/'.$categories->image);
+            }
+
+            // resize igame for category and upload
+            $category = Image::make($image)->resize(1600,479)->stream();
+            Storage::disk('public')->put('category/'.$imageName,$category);
+
+             // Check Category/slider Derectory is Exist
+            if(!Storage::disk('public')->exists('category/slider'))
+            {
+                Storage::disk('public')->makeDirectory('category/slider');
+            }
+
+            // delete category old image
+            if(Storage::disk('public')->exists('category/slider/'.$categories->image))
+            {
+                Storage::disk('public')->delete('category/slider/'.$categories->image);
+            }
+
+            // resize igame for slider and upload
+            $slider = Image::make($image)->resize(500,333)->stream();
+            Storage::disk('public')->put('category/slider/'.$imageName,$slider);
+
+        }else{
+
+            $imageName = $categories->image;
+
+        }
+
+
+        $categories->name = $request->name;
+        $categories->slug =  Str::slug($request->name);;
+        $categories->image = $imageName;
+        $categories->save();
+
+        Session::flash('success','Category Updated Successfully');
+        return redirect()->back();
     }
 
     /**
@@ -135,6 +196,23 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+
+        // category image delete
+        if(Storage::disk('public')->exists('category/'.$category->image))
+        {
+            Storage::disk('public')->delete('category/'.$category->image);
+        }
+
+        // category slider image delete
+        if(Storage::disk('public')->exists('category/slider/'.$category->image))
+        {
+            Storage::disk('public')->delete('category/slider/'.$category->image);
+        }
+
+        $category->delete();
+
+        Session::flash('success','Category Deleted Successfully');
+        return redirect()->back();
     }
 }

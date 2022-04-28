@@ -25,7 +25,7 @@
                                 
                                 <th class="text-center"  tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">#</th>
                                 <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Image</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Tag</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Name</th>
                                 <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Slug</th>
                                 <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Created_at</th>
                                 <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Updated_at</th>
@@ -45,7 +45,7 @@
                                 <td class="text-center">{{$category->updated_at}}</td>
                                 <td class="text-center" style="padding-left: 0px; padding-right: 0px;"><a href="{{route('admin.category.edit',[$category->id])}}"><i class="material-icons btn btn-info waves-effect">edit</i></a></td>
                                 <td class="text-center action_btn" style="padding-left: 0px; padding-right: 0px;">
-                                    <form method="POST" action="{{route('admin.tag.destroy',[$category->id])}}" style="width:50px;">
+                                    <form method="POST" action="{{route('admin.category.destroy',[$category->id])}}" style="width:50px;">
                                         @csrf
                                        @method('Delete')
                                         <button type="submit" style="border:none; background:none; padding:0px; ">
@@ -78,6 +78,7 @@
      <script src="{{asset('backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
 
      <script src="{{asset('backend/js/pages/tables/jquery-datatable.js')}}"></script>
+
 @endsection
 
 @endsection
