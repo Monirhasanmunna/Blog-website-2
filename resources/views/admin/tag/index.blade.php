@@ -41,8 +41,8 @@
                                 <td class="text-center">{{$tag->slug}}</td>
                                 <td class="text-center">{{date_format($tag->created_at,'M d Y')}}</td>
                                 <td class="text-center">{{$tag->updated_at}}</td>
-                                <td class="text-center" style="padding-left: 0px; padding-right: 0px;"><a href="{{route('admin.tag.edit',[$tag->id])}}"><i class="material-icons btn btn-info waves-effect">edit</i></a></td>
-                                <td class="text-center action_btn" style="padding-left: 0px; padding-right: 0px;">
+                                <td class="text-center" style="padding-left: 0px; padding-right: 0px; width:57px;"><a href="{{route('admin.tag.edit',[$tag->id])}}"><i class="material-icons btn btn-info waves-effect">edit</i></a></td>
+                                <td class="text-center action_btn" style="padding-left: 0px; padding-right: 0px;  width:57px;">
                                     <form method="POST" action="{{route('admin.tag.destroy',[$tag->id])}}" style="width:50px;">
                                         @csrf
                                        @method('Delete')
