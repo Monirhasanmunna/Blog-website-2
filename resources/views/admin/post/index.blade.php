@@ -10,8 +10,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                {{-- {{route('admin.categories.create')}} --}}
-                <a class="btn btn-primary waves-effect" href="{{route('admin.category.create')}}">
+                
+                <a class="btn btn-primary waves-effect" href="{{route('admin.post.create')}}">
                     <i class="material-icons">add</i>
                     <span>Add New</span>
                 </a>
@@ -25,27 +25,38 @@
                                 
                                 <th class="text-center"  tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">#</th>
                                 <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Image</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Name</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Slug</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Created_at</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Title</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Author</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;padding-right: 10px;"> <i class="material-icons">visibility</i></th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Status</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">is Approve</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Created at</th>
                                 <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Updated_at</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 40px;">Action</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Action</th>
                             
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($posts as $post)
                         <tr role="row" class="odd"  class="text-center">
 
                                 <td class="text-center" class="sorting_1">{{$i++}}</td>
-                                <td class="text-center"><img src="{{Storage::url('app/public/category/'.$category->image)}}" alt=""></td>
-                                <td class="text-center">{{$category->name}}</td>
-                                <td class="text-center">{{$category->slug}}</td>
-                                <td class="text-center">{{date_format($category->created_at,'M d Y')}}</td>
-                                <td class="text-center">{{$category->updated_at}}</td>
-                                <td class="text-center" style="padding-left: 0px; padding-right: 0px;"><a href="{{route('admin.category.edit',[$category->id])}}"><i class="material-icons btn btn-info waves-effect">edit</i></a></td>
-                                <td class="text-center action_btn" style="padding-left: 0px; padding-right: 0px;">
-                                    <form method="POST" action="{{route('admin.category.destroy',[$category->id])}}" style="width:50px;">
+                                <td class="text-center">{{$post->image}}</td>
+                                <td class="text-center">{{$post->title}}</td>
+                                <td class="text-center">{{$post->user->name}}</td>
+                                <td class="text-center">{{$post->view_count}}</td>
+                                <td class="text-center">{{$post->status}}</td>
+                                <td class="text-center">{{$post->is_approved}}</td>
+                                <td class="text-center">@if ($post->created_at != Null)
+                                    {{date_format($post->created_at,'M d Y')}}
+                                @endif</td>
+                                <td class="text-center">@if ($post->updated_at != Null)
+                                    {{$post->updated_at}}
+                                @endif</td>
+                                
+                                <td class="text-center" style="padding-left: 0px; padding-right: 0px; width:57px;"><a href="{{route('admin.post.edit',[$post->id])}}"><i class="material-icons btn btn-info waves-effect">edit</i></a></td>
+                                <td class="text-center action_btn" style="padding-left: 0px; padding-right: 0px;  width:57px;">
+                                    <form method="POST" action="{{route('admin.post.destroy',[$post->id])}}" style="width:50px;">
                                         @csrf
                                        @method('Delete')
                                         <button type="submit" style="border:none; background:none; padding:0px; ">
@@ -57,7 +68,7 @@
                         </tr>
                         @endforeach
                            </tbody>
-                    </table><div class="dataTables_info" id="DataTables_Table_1_info" role="status" aria-live="polite">Total Categories {{$categories->count()}}</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="DataTables_Table_1_previous"><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="DataTables_Table_1_next"><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
+                    </table><div class="dataTables_info" id="DataTables_Table_1_info" role="status" aria-live="polite">Total Posts {{$posts->count()}}</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_1_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="DataTables_Table_1_previous"><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button "><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="6" tabindex="0">6</a></li><li class="paginate_button next" id="DataTables_Table_1_next"><a href="#" aria-controls="DataTables_Table_1" data-dt-idx="7" tabindex="0">Next</a></li></ul></div></div>
                 </div>
             </div>
         </div>
@@ -78,7 +89,6 @@
      <script src="{{asset('backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
 
      <script src="{{asset('backend/js/pages/tables/jquery-datatable.js')}}"></script>
-
 @endsection
 
 @endsection

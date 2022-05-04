@@ -55,6 +55,13 @@
                 </a>
             </li>
 
+            <li class="{{Request::is('admin/post','admin/post/create') ? 'active' : ''}}">
+                <a href="{{route('admin.post.index')}}">
+                    <i class="material-icons">speaker_notes</i>
+                    <span>Post</span>
+                </a>
+            </li>
+
             <li class="header">System</li>
 
             @endif
