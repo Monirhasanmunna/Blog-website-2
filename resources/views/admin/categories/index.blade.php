@@ -23,13 +23,13 @@
                         <thead>
                             <tr >
                                 
-                                <th class="text-center"  tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">#</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Image</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Name</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Slug</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Created_at</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Updated_at</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 40px;">Action</th>
+                                <th class="text-center"  tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;">#</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;padding-right: 10px;">Image</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;padding-right: 10px;">Name</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;">Post Count</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;padding-right: 10px;">Created_at</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;padding-right: 10px;">Updated_at</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 40px;padding-right: 10px;">Action</th>
                             
                             </tr>
                         </thead>
@@ -40,12 +40,12 @@
                                 <td class="text-center" class="sorting_1">{{$i++}}</td>
                                 <td class="text-center"><img src="{{Storage::url('app/public/category/'.$category->image)}}" alt=""></td>
                                 <td class="text-center">{{$category->name}}</td>
-                                <td class="text-center">{{$category->slug}}</td>
+                                <td class="text-center">{{$category->posts->count()}}</td>
                                 <td class="text-center">{{date_format($category->created_at,'M d Y')}}</td>
                                 <td class="text-center">{{$category->updated_at}}</td>
-                                <td class="text-center" style="padding-left: 0px; padding-right: 0px;"><a href="{{route('admin.category.edit',[$category->id])}}"><i class="material-icons btn btn-info waves-effect">edit</i></a></td>
-                                <td class="text-center action_btn" style="padding-left: 0px; padding-right: 0px;">
-                                    <form method="POST" action="{{route('admin.category.destroy',[$category->id])}}" style="width:50px;">
+                                <td class="text-center" style="padding-left: 0px; padding-right: 0px;width: 48px;"><a href="{{route('admin.category.edit',[$category->id])}}"><i class="material-icons btn btn-info waves-effect">edit</i></a></td>
+                                <td class="text-center action_btn" style="padding-left: 0px; padding-right: 0px;width: 45px;">
+                                    <form method="POST" action="{{route('admin.category.destroy',[$category->id])}}" style="padding-left: 0px; padding-right: 0px;width: 39px;">
                                         @csrf
                                        @method('Delete')
                                         <button type="submit" style="border:none; background:none; padding:0px; ">

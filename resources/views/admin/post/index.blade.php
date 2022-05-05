@@ -24,14 +24,15 @@
                             <tr >
                                 
                                 <th class="text-center"  tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">#</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Image</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Title</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Author</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;padding-right: 10px;"> <i class="material-icons">visibility</i></th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Status</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">is Approve</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Created at</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Updated_at</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Image</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Title</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Author</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style=";padding-right: 10px;"> <i class="material-icons">visibility</i></th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Category</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Tag</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Status</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Is_Approve</th>
+                                
                                 <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Action</th>
                             
                             </tr>
@@ -45,14 +46,27 @@
                                 <td class="text-center">{{$post->title}}</td>
                                 <td class="text-center">{{$post->user->name}}</td>
                                 <td class="text-center">{{$post->view_count}}</td>
-                                <td class="text-center">{{$post->status}}</td>
-                                <td class="text-center">{{$post->is_approved}}</td>
-                                <td class="text-center">@if ($post->created_at != Null)
-                                    {{date_format($post->created_at,'M d Y')}}
-                                @endif</td>
-                                <td class="text-center">@if ($post->updated_at != Null)
-                                    {{$post->updated_at}}
-                                @endif</td>
+                                <td>@foreach ($post->categories as $postCategory)
+                                    <span class="badge badge-pill badge-primary" style="background-color: #28A745;">{{$postCategory->name}}</span>
+                                @endforeach</td>
+                                <td>@foreach ($post->tags as $postTag)
+                                    <span class="badge badge-pill badge-primary" style="background-color: #28A745;">{{$postTag->name}}</span>
+                                @endforeach</td>
+                                <td class="text-center">
+                                    @if ($post->status == 1)
+                                        <span class="badge badge-pill badge-primary" style="background-color: #0062CC;">Published</span>
+                                    @else
+                                        <span class="badge badge-pill badge-info" style="background-color: #BD2130">Pending</span>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if ($post->is_approved == 1)
+                                        <span class="badge badge-pill badge-primary" style="background-color: #0062CC;">Approved</span>
+
+                                    @else
+                                        <span class="badge badge-pill badge-primary" style="background-color: #BD2130;">Pending</span>
+                                    @endif
+                                </td>
                                 
                                 <td class="text-center" style="padding-left: 0px; padding-right: 0px; width:57px;"><a href="{{route('admin.post.edit',[$post->id])}}"><i class="material-icons btn btn-info waves-effect">edit</i></a></td>
                                 <td class="text-center action_btn" style="padding-left: 0px; padding-right: 0px;  width:57px;">

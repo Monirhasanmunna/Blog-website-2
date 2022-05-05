@@ -23,12 +23,12 @@
                         <thead>
                             <tr >
                                 
-                                <th class="text-center"  tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">#</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Tag</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Slug</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Created_at</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">Updated_at</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 40px;">Action</th>
+                                <th class="text-center"  tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;width:80px;">#</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;padding-right: 10px;">Name</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px; width:100px">Post Count</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 209px;padding-right: 10px;">Created_at</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 209px;padding-right: 10px;">Updated_at</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 40px;padding-right: 10px;">Action</th>
                             
                             </tr>
                         </thead>
@@ -38,7 +38,7 @@
 
                                 <td class="text-center" class="sorting_1">{{$i++}}</td>
                                 <td class="text-center">{{$tag->name}}</td>
-                                <td class="text-center">{{$tag->slug}}</td>
+                                <td class="text-center">{{$tag->posts->count()}}</td>
                                 <td class="text-center">{{date_format($tag->created_at,'M d Y')}}</td>
                                 <td class="text-center">{{$tag->updated_at}}</td>
                                 <td class="text-center" style="padding-left: 0px; padding-right: 0px; width:57px;"><a href="{{route('admin.tag.edit',[$tag->id])}}"><i class="material-icons btn btn-info waves-effect">edit</i></a></td>
