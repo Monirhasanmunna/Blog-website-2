@@ -23,17 +23,17 @@
                         <thead>
                             <tr >
                                 
-                                <th class="text-center"  tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">#</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Image</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Title</th>
-                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Author</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style=";padding-right: 10px;"> <i class="material-icons">visibility</i></th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Category</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Tag</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Status</th>
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Is_Approve</th>
+                                <th class="text-center"  tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;">#</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;">Image</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;">Title</th>
+                                <th  class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;">Author</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;"> <i class="material-icons">visibility</i></th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;">Category</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;">Tag</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;">Status</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="padding-right: 10px;">Is_Approve</th>
                                 
-                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="2" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Action</th>
+                                <th class="text-center" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="3" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="">Action</th>
                             
                             </tr>
                         </thead>
@@ -42,7 +42,7 @@
                         <tr role="row" class="odd"  class="text-center">
 
                                 <td class="text-center" class="sorting_1">{{$i++}}</td>
-                                <td class="text-center">{{$post->image}}</td>
+                                <td class="text-center"><img style="max-width:70px;" class="img-responsive img-thumbnail" src="{{ url('storage/post/'.$post->image) }}" alt=""></td>
                                 <td class="text-center">{{$post->title}}</td>
                                 <td class="text-center">{{$post->user->name}}</td>
                                 <td class="text-center">{{$post->view_count}}</td>
@@ -68,7 +68,8 @@
                                     @endif
                                 </td>
                                 
-                                <td class="text-center" style="padding-left: 0px; padding-right: 0px; width:57px;"><a href="{{route('admin.post.edit',[$post->id])}}"><i class="material-icons btn btn-info waves-effect">edit</i></a></td>
+                                <td class="text-center" style="padding-left: 0px; padding-right: 0px; width:57px;"><a href="{{route('admin.post.show',[$post->id])}}"><i class="material-icons btn btn-info waves-effect">visibility</i></a></td>
+                                <td class="text-center" style="padding-left: 0px; padding-right: 0px; width:57px;"><a href="{{route('admin.post.edit',[$post->id])}}"><i class="material-icons btn btn-primary waves-effect">edit</i></a></td>
                                 <td class="text-center action_btn" style="padding-left: 0px; padding-right: 0px;  width:57px;">
                                     <form method="POST" action="{{route('admin.post.destroy',[$post->id])}}" style="width:50px;">
                                         @csrf
