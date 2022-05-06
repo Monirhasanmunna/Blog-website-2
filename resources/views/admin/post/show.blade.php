@@ -11,7 +11,13 @@
     <button type="button" class="btn btn-primary pull-right waves-effect" disabled><i class="material-icons">done</i>
         <span>Approved</span></button>
     @else
-        <button type="button" class="btn btn-info pull-right waves-effect">Approve</button>
+    
+        <form method="POST" action="{{route('admin.post.approve',[$post->id])}}" class="pull-right ">
+            @csrf
+           @method('PUT')
+            <button type="submit" class="btn bg-green">Approve</button>
+          </form>
+        
     @endif
     <br>
     <br>

@@ -62,6 +62,13 @@
                 </a>
             </li>
 
+            <li class="{{Request::is('admin/pending/post') ? 'active' : ''}}">
+                <a href="{{route('admin.post.pending')}}">
+                    <i class="material-icons">speaker_notes</i>
+                    <span>Pending_Post</span>
+                </a>
+            </li>
+
             <li class="header">System</li>
 
             @endif

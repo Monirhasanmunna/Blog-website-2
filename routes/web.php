@@ -28,6 +28,8 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::resource('tag','TagController');
     Route::resource('category','CategoryController');
     Route::resource('post','PostController');
+    Route::get('pending/post','PostController@pending')->name('post.pending');
+    Route::put('approve/{id}/post','PostController@approve')->name('post.approve');
 
 });
 
