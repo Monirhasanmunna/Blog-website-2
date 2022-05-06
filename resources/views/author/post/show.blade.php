@@ -2,16 +2,14 @@
 
 @section('content')
 <div class="container-fluid">
-    <a class="btn btn-danger waves-effect" href="{{route('admin.post.index')}}"><i class="material-icons">arrow_back</i>
+    <a class="btn btn-danger waves-effect" href="{{route('author.post.index')}}"><i class="material-icons">arrow_back</i>
     <span>Back</span>
     </a>
-    <a class="btn btn-primary waves-effect" href="{{route('admin.post.edit',[$post->id])}}"><i class="material-icons">edit</i><span>Edit Post</span></a>
+    <a class="btn btn-primary waves-effect" href="{{route('author.post.edit',[$post->id])}}"><i class="material-icons">edit</i><span>Edit Post</span></a>
 
     @if ($post->is_approved == true)
     <button type="button" class="btn btn-primary pull-right waves-effect" disabled><i class="material-icons">done</i>
         <span>Approved</span></button>
-    @else
-        <button type="button" class="btn btn-info pull-right waves-effect">Approve</button>
     @endif
     <br>
     <br>

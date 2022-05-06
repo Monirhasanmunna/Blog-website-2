@@ -74,6 +74,12 @@
                 </a>
             </li>
 
+            <li class="{{Request::is('author/post','author/post/create') ? 'active' : ''}}">
+                <a href="{{route('author.post.index')}}">
+                    <i class="material-icons">speaker_notes</i>
+                    <span>Post</span>
+                </a>
+            </li>
             <li class="header">System</li>
             @endif
 
