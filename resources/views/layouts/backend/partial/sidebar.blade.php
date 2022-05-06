@@ -69,7 +69,27 @@
                 </a>
             </li>
 
+            <li class="{{Request::is('admin/subscriber') ? 'active' : ''}}">
+                <a href="{{route('admin.subscriber.index')}}">
+                    <i class="material-icons">subscriptions</i>
+                    <span>Subscriber</span>
+                </a>
+            </li>
+
             <li class="header">System</li>
+
+            <li>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+
+                 <i class="material-icons">input</i><span>Sign Out</span>
+             </a>
+
+             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                 @csrf
+             </form>                   
+            </li>
 
             @endif
 
@@ -87,7 +107,21 @@
                     <span>Post</span>
                 </a>
             </li>
+
             <li class="header">System</li>
+
+            <li>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+
+                 <i class="material-icons">input</i><span>Sign Out</span>
+             </a>
+
+             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                 @csrf
+             </form>                   
+            </li>
             @endif
 
         </ul>

@@ -41,9 +41,24 @@
 					<div class="footer-section">
 
 						<h4 class="title"><b>SUBSCRIBE</b></h4>
+						@if(session()->has('success'))
+							<div class="alert alert-success">
+								{{ session()->get('success') }}
+							</div>
+						@endif
+							@if ($errors->any())
+								<div class="alert text-danger" style="padding-left: 0px;margin-bottom: 0px;">
+									
+										@foreach ($errors->all() as $error)
+											<span><strong>{{ $error }}</strong></span>
+										@endforeach
+									
+								</div>
+							@endif
 						<div class="input-area">
-							<form>
-								<input class="email-input" type="text" placeholder="Enter your email">
+							<form method="POST" action="{{route('subscriber.email')}}">
+								@csrf
+								<input class="email-input" name="email" type="text" placeholder="Enter your email" class="@error('email') is-invalid @enderror">
 								<button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
 							</form>
 						</div>
