@@ -111,6 +111,11 @@ class PostController extends Controller
      */
     public function show(post $post)
     {
+        if($post->user_id != Auth::id())
+        {
+            Session::flash('success','You are not authorized to acces this post');
+            return redirect()->back();
+        }
         return view('author.post.show',compact('post'));
     }
 
@@ -122,6 +127,11 @@ class PostController extends Controller
      */
     public function edit(post $post)
     {
+        if($post->user_id != Auth::id())
+        {
+            Session::flash('success','You are not authorized to acces this post');
+            return redirect()->back();
+        }
         $categories = Category::all();
         $tags = Tag::all();
         return view('author.post.edit',compact('categories','tags','post'));
@@ -203,6 +213,12 @@ class PostController extends Controller
      */
     public function destroy(post $post)
     {
+        if($post->user_id != Auth::id())
+        {
+            Session::flash('success','You are not authorized to acces this post');
+            return redirect()->back();
+        }
+        
         if(Storage::disk('public')->exists('post/'.$post->image))
             {
                 Storage::disk('public')->delete('post/'.$post->image);
