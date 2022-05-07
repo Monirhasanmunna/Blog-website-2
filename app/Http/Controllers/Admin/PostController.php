@@ -230,7 +230,7 @@ class PostController extends Controller
             $subscribers = Subscriber::all();
             //new post notification mail send to subscrribers
             foreach ($subscribers as $subscriber) {
-               
+                
                 Notification::route('mail', $subscriber->email)
                       ->notify(new newPostNotify($post));
             }
