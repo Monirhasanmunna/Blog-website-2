@@ -6,7 +6,10 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Notifications\AuthorPostApproved;
 use App\Notifications\AuthorPostApprove;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\newPostNotify;
 use App\Post;
+use App\Subscriber;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -99,6 +102,15 @@ class PostController extends Controller
 
         $post->is_approved = true;
         $post->save();
+
+        $subscribers = Subscriber::all();
+        //new post notification mail send to subscrribers
+        foreach ($subscribers as $subscriber) {
+           
+            Notification::route('mail', $subscriber->email)
+                  ->notify(new newPostNotify($post));
+        }
+        
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
 
@@ -212,7 +224,17 @@ class PostController extends Controller
         {
             $post->is_approved = true;
             $post->save();
+            //Author new post approval notificatin mail send to author
             $post->user->notify(new AuthorPostApproved($post));
+
+            $subscribers = Subscriber::all();
+            //new post notification mail send to subscrribers
+            foreach ($subscribers as $subscriber) {
+               
+                Notification::route('mail', $subscriber->email)
+                      ->notify(new newPostNotify($post));
+            }
+
             Session::flash('success','Post Approve Successfully');
             return redirect()->back();
         }else{
