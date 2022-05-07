@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
-use App\Tag;
 use App\Http\Controllers\Controller;
+use App\Notifications\AuthorPostApproved;
+use App\Notifications\AuthorPostApprove;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -210,6 +212,7 @@ class PostController extends Controller
         {
             $post->is_approved = true;
             $post->save();
+            $post->user->notify(new AuthorPostApproved($post));
             Session::flash('success','Post Approve Successfully');
             return redirect()->back();
         }else{

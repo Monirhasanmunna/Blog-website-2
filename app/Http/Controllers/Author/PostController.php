@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Category;
 use App\Tag;
+use App\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,8 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewAuthorPost;
 
 class PostController extends Controller
 {
@@ -98,6 +101,13 @@ class PostController extends Controller
         $post->save();
         $post->categories()->attach($request->categories);
         $post->tags()->attach($request->tags);
+
+        if($post->save())
+        {
+            $users = User::where('roles_id',1)->get();
+            Notification::send($users, new NewAuthorPost($post));
+        }
+        
 
         Session::flash('success','Post Added Successfully');
         return redirect()->back();
