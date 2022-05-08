@@ -55,7 +55,7 @@
                     <div class="form-group form-float">
                         <div class="form-line">
                             <p><strong>Select Category :</strong> </p>
-                            <select name="categories[]" id="category" class="selectpicker" form-control show-tick
+                            <select name="categories[]" id="" class="selectpicker" form-control show-tick
                                 multiple>
                                 @foreach ($categories as $category)
                                 <option
@@ -73,7 +73,7 @@
                         
                         <div class="form-line">
                             <p><strong>Select Tag :</strong> </p>
-                            <select name="tags[]" id="tag" class="selectpicker" form-control show-tick
+                            <select name="tags[]" id="" class="selectpicker" form-control show-tick
                                 multiple>
                                 @foreach ($tags as $tag)
                                 <option

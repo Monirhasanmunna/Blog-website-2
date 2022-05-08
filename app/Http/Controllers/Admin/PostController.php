@@ -151,6 +151,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        
         $request->validate([
             'title' => 'required',
             'image' => 'sometimes|mimes:jpeg,png,jpg',
