@@ -23,6 +23,8 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::delete('subscribers/{id}/delete','SubscribersController@delete')->name('subscriber.delete');
     Route::get('settings','SettingsController@index')->name('settings.index');
     Route::put('settings/{id}/update','SettingsController@update')->name('settings.update');
+    Route::put('settings/password/{id}/update','SettingsController@passwordUpdate')->name('password.update');
+    
 
 });
 

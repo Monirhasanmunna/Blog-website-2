@@ -4,9 +4,24 @@
 
 
 /* My css here */
-/* .material-icons {
-  color: blue;
-} */
+
+.text-success {
+  color: #2b982b; }
+
+.text-info {
+  color: #00b0e4; }
+
+.text-warning {
+  color: #ff9600 !important; }
+
+.text-danger {
+  color: #fb483a !important; }
+
+.text-dismissible .close {
+  color: #fff;
+  opacity: 1;
+  border: none;
+  text-shadow: none; }
 
 .action_btn{
   padding-left: 0px;
@@ -3418,6 +3433,8 @@ section.content {
   opacity: 1;
   border: none;
   text-shadow: none; }
+
+
 
 /* Dialogs (SweetAlert) ======================== */
 .sweet-alert {

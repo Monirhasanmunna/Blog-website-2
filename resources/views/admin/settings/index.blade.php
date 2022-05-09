@@ -1,5 +1,17 @@
 @extends('layouts.backend.app')
 
+@section('css')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+alpha/css/bootstrap.css" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" 
+href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+@endsection
+
 @section('content')
 <div class="container_fluid">
     <div class="row clearfix">
@@ -44,7 +56,7 @@
                                                     </div>
                                                 </div>
                                                 @error('fullname')
-                                                    <span class="alert alert-danger">{{ $message }}</span>
+                                                    <span class="alert text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -59,7 +71,7 @@
                                                     </div>
                                                 </div>
                                                 @error('username')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    <div class="alert text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -74,7 +86,7 @@
                                                     </div>
                                                 </div>
                                                 @error('email')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    <div class="alert text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -89,7 +101,7 @@
                                                     </div>
                                                 </div>
                                                 @error('image')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                    <div class=" text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -115,13 +127,57 @@
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="profile_with_icon_title">
-                            <b>Profile Content</b>
-                            <p>
-                                Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                sadipscing mel.
-                            </p>
+                            <div class="card" style="box-shadow: 0px 0px 0px">
+                                <div class="body">
+                                    <form class="form-horizontal" method="POST" action="{{route('admin.password.update',[$user->id])}}">
+                                        @method('PUT')
+                                        @csrf
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 pl-0 form-control-label">
+                                                <label for="oldpassword">Old Password :</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="password" id="oldpassword" name="oldpassword" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 pl-0 form-control-label">
+                                                <label for="newpassword">New Password :</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="password" id="newpassword" name="newpassword" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row clearfix">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 pl-0 form-control-label">
+                                                <label for="password_confirmation">Confirmed Password :</label>
+                                            </div>
+                                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                                <div class="form-group">
+                                                    <div class="form-line">
+                                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="row clearfix">
+                                            <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">Update Password</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,4 +185,44 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    @if(Session::has('message'))
+    toastr.options =
+    {
+        "closeButton" : true,
+        "progressBar" : true
+    }
+            toastr.success("{{ session('message') }}");
+    @endif
+  
+    @if(Session::has('error'))
+    toastr.options =
+    {
+        "closeButton" : true,
+        "progressBar" : true
+    }
+            toastr.error("{{ session('error') }}");
+    @endif
+
+    @if(Session::has('info'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.info("{{ session('info') }}");
+  @endif
+
+  @if(Session::has('warning'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.warning("{{ session('warning') }}");
+  @endif
+</script>
 @endsection

@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
     public function index()
     {
+        
         $user = User::FindorFail(Auth::id());
         return view('admin.settings.index',compact('user'));
     }
@@ -48,11 +50,17 @@ class SettingsController extends Controller
                 Storage::disk('public')->makeDirectory('user');
             }
 
+            //delete old photo
+            if(Storage::disk('public')->exists('user/'.$user->image))
+            {
+                Storage::disk('public')->delete('user/'.$user->image);
+            }
+
             $postImage = Image::make($image)->resize(360,360)->stream();
             Storage::disk('public')->put('user/'.$imageName,$postImage);
         }else{
 
-            $imageName = 'default.png';
+            $imageName = $user->image;
         }
 
         $user->name = $request->fullname;
@@ -66,4 +74,38 @@ class SettingsController extends Controller
         return redirect()->back();
 
     }
+
+
+    public function passwordUpdate(Request $request)
+    {
+        $request->validate([
+            'oldpassword' =>'required|password|min:8',
+            'newpassword' =>'required|password|min:8'
+        ]);
+
+        $hashPassword = Auth::user()->password;
+
+        if(Hash::check($request->oldpassword, $hashPassword))
+        {
+
+            if(!Hash::check($request->newpassword,$hashPassword))
+            {
+                $user = User::FindorFail(Auth::id());
+                $user->password = bcrypt($request->newpassword);
+                $user->save();
+                Auth::logout();
+                Session::flash('success','Password Update Successfully');
+                return redirect()->back();
+
+            }else{
+                return redirect()->back()->with('error','New password can not be match old password');
+            }
+
+        }else{
+
+            return redirect()->back()->with('error','old password does not matched');
+
+        }
+    }
+
 }
