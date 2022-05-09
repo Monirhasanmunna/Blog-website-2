@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
 use App\User;
@@ -19,7 +19,7 @@ class SettingsController extends Controller
     {
         
         $user = User::FindorFail(Auth::id());
-        return view('admin.settings.index',compact('user'));
+        return view('author.settings.index',compact('user'));
     }
 
     public function update(Request $request,$id)
@@ -93,8 +93,8 @@ class SettingsController extends Controller
                 $user = User::FindorFail(Auth::id());
                 $user->password = bcrypt($request->newpassword);
                 $user->save();
-                Session::flash('success','Password Update Successfully');
                 Auth::logout();
+                Session::flash('success','Password Update Successfully');
                 return redirect()->back();
 
             }else{

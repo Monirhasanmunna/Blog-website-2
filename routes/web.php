@@ -33,6 +33,9 @@ Route::group(['as'=>'author.','prefix'=>'author','namespace'=>'Author','middlewa
 
     Route::get('dashboard','DashboardController@index')->name('dashboard');
     Route::resource('post','PostController');
+    Route::get('settings','SettingsController@index')->name('settings.index');
+    Route::put('settings/{id}/update','SettingsController@update')->name('settings.update');
+    Route::put('settings/password/{id}/update','SettingsController@passwordUpdate')->name('password.update');
 
 });
 
