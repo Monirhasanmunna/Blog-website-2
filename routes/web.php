@@ -21,6 +21,8 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::put('approve/{id}/post','PostController@approve')->name('post.approve');
     Route::get('subscribers','SubscribersController@index')->name('subscriber.index');
     Route::delete('subscribers/{id}/delete','SubscribersController@delete')->name('subscriber.delete');
+    Route::get('settings','SettingsController@index')->name('settings.index');
+    Route::put('settings/{id}/update','SettingsController@update')->name('settings.update');
 
 });
 
