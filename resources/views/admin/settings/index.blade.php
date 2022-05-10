@@ -82,7 +82,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
                                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="email" id="email" name="email" class="form-control" value="{{$user->email}}" class="@error('title') is-invalid @enderror">
+                                                        <input type="email" id="email" name="email" class="form-control" class="@error('title') is-invalid @enderror">
                                                     </div>
                                                 </div>
                                                 @error('email')
@@ -133,46 +133,53 @@ href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
                                         @method('PUT')
                                         @csrf
                                         <div class="row clearfix">
-                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 pl-0 form-control-label">
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                                 <label for="oldpassword">Old Password :</label>
                                             </div>
                                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="password" id="oldpassword" name="oldpassword" class="form-control">
+                                                        <input type="password" id="oldpassword" placeholder="Enter old password" name="oldpassword" class="form-control" class="@error('title') is-invalid @enderror">
                                                     </div>
                                                 </div>
+                                                @error('fullname')
+                                                    <span class="alert text-danger">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="row clearfix">
-                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 pl-0 form-control-label">
-                                                <label for="newpassword">New Password :</label>
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label for="user_name">New Password :</label>
                                             </div>
                                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="password" id="newpassword" name="newpassword" class="form-control">
+                                                        <input type="password" placeholder="Enter new password" id="user_name" name="newpassword" class="form-control"  class="@error('title') is-invalid @enderror">
                                                     </div>
                                                 </div>
+                                                @error('username')
+                                                    <div class="alert text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="row clearfix">
-                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 pl-0 form-control-label">
-                                                <label for="password_confirmation">Confirmed Password :</label>
+                                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                                <label for="email">Confirm Password :</label>
                                             </div>
                                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                                                        <input type="password" id="email" placeholder="Enter password confirmation"  name="password_confirmation" class="form-control"  class="@error('title') is-invalid @enderror">
                                                     </div>
                                                 </div>
-                                               
+                                                @error('email')
+                                                    <div class="alert text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
-                                       
                                         <div class="row clearfix">
                                             <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">Update Password</button>
+                                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">Password Update</button>
                                             </div>
                                         </div>
                                     </form>

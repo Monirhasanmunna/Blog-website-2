@@ -45,7 +45,7 @@
 
                         <div class="blog-image"><img src="{{asset('storage/post/'.$post->image)}}" alt="{{$post->image}}"></div>
 
-                        <a class="avatar" href="#"><img src="{{asset('images/user.png')}}" alt="Profile Image"></a>
+                        <a class="avatar" href="#"><img src="{{asset('storage/user/'.$post->user->image)}}" alt="Profile Image"></a>
 
                         <div class="blog-info">
 
