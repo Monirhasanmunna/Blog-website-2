@@ -79,33 +79,38 @@ class SettingsController extends Controller
     public function passwordUpdate(Request $request)
     {
         $request->validate([
-            'oldpassword' =>'required|password|min:8',
-            'newpassword' =>'required|password|min:8'
+
+            'oldpassword' => 'required|min:8',
+            'newpassword' => 'required|min:8',
+
         ]);
+
 
         $hashPassword = Auth::user()->password;
 
-        if(Hash::check($request->oldpassword, $hashPassword))
+        if(Hash::check($request->oldpassword ,$hashPassword))
         {
 
-            if(!Hash::check($request->newpassword,$hashPassword))
+            if(!Hash::check($request->newpassword, $hashPassword))
             {
                 $user = User::FindorFail(Auth::id());
+
                 $user->password = bcrypt($request->newpassword);
                 $user->save();
                 Auth::logout();
-                Session::flash('success','Password Update Successfully');
                 return redirect()->back();
-
             }else{
-                return redirect()->back()->with('error','New password can not be match old password');
+
+                return redirect()->back()->with('error','New password and old Password can not be match');
+
             }
 
         }else{
 
-            return redirect()->back()->with('error','old password does not matched');
+            return redirect()->back()->with('error','Old password did not match !');
 
         }
+
     }
 
 }

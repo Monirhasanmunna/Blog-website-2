@@ -82,7 +82,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
                                             <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                                 <div class="form-group">
                                                     <div class="form-line">
-                                                        <input type="email" id="email" name="email" class="form-control" class="@error('title') is-invalid @enderror">
+                                                        <input type="email" id="email" name="email" class="form-control"  value="{{$user->email}}" class="@error('title') is-invalid @enderror">
                                                     </div>
                                                 </div>
                                                 @error('email')
