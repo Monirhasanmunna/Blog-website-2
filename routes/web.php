@@ -10,6 +10,13 @@ Route::get('/','HomeController@index')->name('home');
 Route::post('subscribe','Subscribers@subscribe')->name('subscriber.email');
 
 
+Route::group(['middleware'=>['auth']] , function(){
+
+    Route::post('favorite/{post}/add','FavoriteController@add')->name('favorite.post');
+
+});
+
+
 //Admin group route
 Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admin']],function(){
 

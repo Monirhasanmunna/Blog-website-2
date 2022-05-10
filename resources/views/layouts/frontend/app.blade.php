@@ -14,6 +14,8 @@
 	<link href="{{asset('frontend/css/bootstrap.css')}}" rel="stylesheet">
 	<link href="{{asset('frontend/css/home/styles.css')}}" rel="stylesheet">
 	<link href="{{asset('frontend/css/home/responsive.css')}}" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	@yield('css')
 
 </head>
@@ -36,8 +38,7 @@
 	<script src="{{asset('frontend/js/bootstrap.js')}}"></script>
 	<script src="{{asset('frontend/js/swiper.js')}}"></script>
 	<script src="{{asset('frontend/js/scripts.js')}}"></script>
-
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 </body>
 </html>
