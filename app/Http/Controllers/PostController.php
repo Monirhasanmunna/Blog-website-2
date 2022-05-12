@@ -28,8 +28,7 @@ class PostController extends Controller
 
     public function allPost()
     {
-
-        $posts = Post::latest()->paginate(4);
+        $posts = Post::latest()->paginate(10);
         return view('posts',compact('posts'));
 
     }

@@ -85,7 +85,7 @@
 
         </div><!-- row -->
 
-        <a class="load-more-btn" href="#"><b>LOAD MORE</b></a>
+        <a class="load-more-btn" href="{{route('post.all')}}"><b>LOAD MORE</b></a>
 
     </div><!-- container -->
 </section><!-- section -->

@@ -46,9 +46,9 @@
                 </div><!-- card -->
             </div><!-- col-lg-4 col-md-6 -->
             @endforeach
-            
         </div><!-- row -->
 
+        {{-- pagination --}}
         <div>
             <span class="m-auto">
                 {{$posts->links()}}
