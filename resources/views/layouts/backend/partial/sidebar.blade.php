@@ -62,6 +62,13 @@
                 </a>
             </li>
 
+            <li class="{{Request::is('admin/favorite') ? 'active' : ''}}">
+                <a href="{{route('admin.favorite.index')}}">
+                    <i class="material-icons">favorite</i>
+                    <span>Favorite Post</span>
+                </a>
+            </li>
+
             <li class="{{Request::is('admin/pending/post') ? 'active' : ''}}">
                 <a href="{{route('admin.post.pending')}}">
                     <i class="material-icons">speaker_notes</i>

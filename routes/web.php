@@ -31,6 +31,9 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::get('settings','SettingsController@index')->name('settings.index');
     Route::put('settings/{id}/update','SettingsController@update')->name('settings.update');
     Route::put('settings/password/{id}/update','SettingsController@passwordUpdate')->name('password.update');
+    Route::get('favorite','FavoriteController@index')->name('favorite.index');
+    Route::get('favorite/{post}/details','FavoriteController@show')->name('favorite.show');
+    Route::delete('favorite/{post}/delete','FavoriteController@destroy')->name('favorite.destroy');
     
 
 });
