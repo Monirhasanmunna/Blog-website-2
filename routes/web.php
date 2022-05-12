@@ -9,6 +9,7 @@ Auth::routes();
 Route::get('/','HomeController@index')->name('home');
 Route::post('subscribe','Subscribers@subscribe')->name('subscriber.email');
 Route::get('post/{slug}/details','PostController@index')->name('post.details');
+Route::get('posts','PostController@allPost')->name('post.all');
 
 
 //Favorite group route
@@ -34,7 +35,6 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::get('favorite/{post}/details','FavoriteController@show')->name('favorite.show');
     Route::delete('favorite/{post}/delete','FavoriteController@destroy')->name('favorite.destroy');
     
-
 });
 
 //Author route group

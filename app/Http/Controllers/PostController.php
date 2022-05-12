@@ -16,7 +16,6 @@ class PostController extends Controller
         $post = Post::where('slug',$slug)->first();
         $randomPost = Post::inRandomOrder()->limit(3)->get();
         $categories = Category::all();
-
         $postKey = 'Post'.$post->id;
         if(!Session::has($postKey))
         {
@@ -25,5 +24,13 @@ class PostController extends Controller
         }
 
         return view('post',compact('post','randomPost','categories'));
+    }
+
+    public function allPost()
+    {
+
+        $posts = Post::latest()->paginate(4);
+        return view('posts',compact('posts'));
+
     }
 }
