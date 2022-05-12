@@ -8,14 +8,13 @@ Auth::routes();
 //frontent route
 Route::get('/','HomeController@index')->name('home');
 Route::post('subscribe','Subscribers@subscribe')->name('subscriber.email');
+Route::get('post/{slug}/details','PostController@index')->name('post.details');
 
 
+//Favorite group route
 Route::group(['middleware'=>['auth']] , function(){
-
     Route::post('favorite/{post}/add','FavoriteController@add')->name('favorite.post');
-
 });
-
 
 //Admin group route
 Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admin']],function(){
