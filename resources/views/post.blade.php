@@ -81,7 +81,7 @@
                                 @endguest
 
                             </li>
-                            <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                            <li><a href="#"><i class="ion-chatbubble"></i>{{$post->comments->count()}}</a></li>
                             <li><a href="#"><i class="ion-eye"></i>{{$post->view_count}}</a></li>
                         </ul>
 
@@ -168,13 +168,12 @@
 
                         <div class="blog-info">
 
-                            <h4 class="title"><a href="{{route('post.details',[$posts->slug])}}"><b>{{$posts->title}}</b></a></h4>
+                            <h4 class="title"><a
+                                    href="{{route('post.details',[$posts->slug])}}"><b>{{$posts->title}}</b></a></h4>
 
                             <ul class="post-footer">
                                 <li>
-
                                     @guest
-
                                     <a href="javascript:void(0);"
                                         onclick="toastr['info']('To Add Favorite Post You need to login first !')"><i
                                             class="ion-heart"></i>{{$posts->favorite_to_user()->count()}}</a>
@@ -188,11 +187,9 @@
                                         style="display: none;">
                                         @csrf
                                     </form>
-
                                     @endguest
-
                                 </li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="#"><i class="ion-chatbubble"></i>{{$posts->comments->count()}}</a></li>
                                 <li><a href="#"><i class="ion-eye"></i>{{$posts->view_count}}</a></li>
                             </ul>
 
@@ -202,8 +199,6 @@
             </div><!-- col-md-6 col-sm-12 -->
 
             @endforeach
-
-
         </div><!-- row -->
 
     </div><!-- container -->

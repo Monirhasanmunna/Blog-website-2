@@ -72,7 +72,7 @@
                                     @endguest
                                     
                                 </li>
-                                <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
+                                <li><a href="#"><i class="ion-chatbubble"></i>{{$post->comments->count()}}</a></li>
                                 <li><a href="javascript:void(0);"><i class="ion-eye"></i>{{$post->view_count}}</a></li>
                             </ul>
 
