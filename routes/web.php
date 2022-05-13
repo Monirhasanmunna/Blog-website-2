@@ -10,8 +10,7 @@ Route::get('/','HomeController@index')->name('home');
 Route::post('subscribe','Subscribers@subscribe')->name('subscriber.email');
 Route::get('post/{slug}/details','PostController@index')->name('post.details');
 Route::get('posts','PostController@allPost')->name('post.all');
-
-
+Route::get('category/{slug}/post','PostController@PostByCategory')->name('category.post');
 
 Route::group(['middleware'=>['auth']] , function(){
     Route::post('favorite/{post}/add','FavoriteController@add')->name('favorite.post');

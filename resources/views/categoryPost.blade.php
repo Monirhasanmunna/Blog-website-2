@@ -1,13 +1,28 @@
 @extends('layouts.frontend.app')
 
+@section('css')
+<link href="{{asset('frontend/css/post/styles.css')}}" rel="stylesheet">
+<link href="{{asset('frontend/css/post/responsive.css')}}" rel="stylesheet">
+@endsection
+
 @section('content')
-<div class="slider"></div><!-- slider -->
+@if ($posts->posts->count() < 0)
+<div class="display-table  center-text">
+    <h1 class="title display-table-cell"><b>{{'Sorry No Data Found :('}}</b></h1>
+</div>
+@else
+
+<div class="slider" style="background-image:url({{asset('storage/category/'.$posts->image)}});">
+    <div class="display-table  center-text">
+        <h1 class="title display-table-cell"><b>{{$posts->name}}</b></h1>
+    </div>
+</div><!-- slider -->
 
 <section class="blog-area section">
     <div class="container">
 
         <div class="row">
-            @foreach ($posts as $post)
+            @foreach ($posts->posts as $post)
                 <div class="col-lg-4 col-md-6">
                 <div class="card h-100">
                     <div class="single-post post-style-1">
@@ -48,13 +63,14 @@
             @endforeach
         </div><!-- row -->
 
-        {{-- pagination --}}
+        <!-- {{-- pagination --}}
         <div>
             <span class="m-auto">
-                {{$posts->links()}}
+                {{-- {{$posts->links()}} --}}
             </span>
-        </div>
+        </div> -->
 
     </div><!-- container -->
 </section><!-- section -->
+@endif
 @endsection

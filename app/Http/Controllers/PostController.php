@@ -16,7 +16,6 @@ class PostController extends Controller
 
         $post = Post::where('slug',$slug)->first();
         $randomPost = Post::inRandomOrder()->limit(3)->get();
-        $categories = Category::all();
         $comments = $post->comments()->get();
         $postKey = 'Post'.$post->id;
         if(!Session::has($postKey))
@@ -25,13 +24,21 @@ class PostController extends Controller
             Session::put($postKey,1);
         }
 
-        return view('post',compact('post','randomPost','categories','comments'));
+        return view('post',compact('post','randomPost','comments'));
     }
 
     public function allPost()
     {
+        $categories = Category::all();
         $posts = Post::latest()->paginate(10);
-        return view('posts',compact('posts'));
+        return view('posts',compact('posts','categories'));
 
+    }
+
+    public function PostByCategory($slug)
+    {
+        $categories = Category::all();
+        $posts = Category::where('slug',$slug)->first();
+        return view('categoryPost',compact('posts','categories'));
     }
 }

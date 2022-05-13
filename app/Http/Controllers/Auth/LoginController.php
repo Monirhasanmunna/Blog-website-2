@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -36,14 +37,15 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        $categories = Category::all();
         if(Auth::check() && Auth::user()->role->id == 1){
 
-            $this->redirectTo = route('admin.dashboard');
+            $this->redirectTo = route('admin.dashboard',compact('categories'));
             
         }else{
-            $this->redirectTo = route('author.dashboard');
+            $this->redirectTo = route('author.dashboard',compact('categories'));
         }
 
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout',compact('categories'));
     }
 }
