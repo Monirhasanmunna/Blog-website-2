@@ -54,7 +54,7 @@
 
                         <ul class="tags">
                             @foreach ($post->tags as $post_tag)
-                            <li><a href="{{$post_tag->slug}}">{{$post_tag->name}}</a></li>
+                            <li><a href="{{route('tag.post',[$post_tag->slug])}}">{{$post_tag->name}}</a></li>
                             @endforeach
                         </ul>
                     </div><!-- blog-post-inner -->

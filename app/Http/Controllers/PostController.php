@@ -41,4 +41,11 @@ class PostController extends Controller
         $posts = Category::where('slug',$slug)->first();
         return view('categoryPost',compact('posts','categories'));
     }
+
+    public function PostByTag($slug)
+    {
+        $categories = Category::all();
+        $posts = Tag::where('slug',$slug)->first();
+        return view('tagPost',compact('posts','categories'));
+    }
 }
