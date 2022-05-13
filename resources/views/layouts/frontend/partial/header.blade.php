@@ -14,7 +14,7 @@
 				@if (Auth::id() == 1)
 				<li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
 				@else
-					<li><a href="{{route('Author.dashboard')}}">Dashboard</a></li>
+					<li><a href="{{route('author.dashboard')}}">Dashboard</a></li>
 				@endif
 			@endguest
 		</ul><!-- main-menu -->

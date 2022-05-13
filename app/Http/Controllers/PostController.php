@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Tag;
@@ -16,6 +17,7 @@ class PostController extends Controller
         $post = Post::where('slug',$slug)->first();
         $randomPost = Post::inRandomOrder()->limit(3)->get();
         $categories = Category::all();
+        $comments = $post->comments()->get();
         $postKey = 'Post'.$post->id;
         if(!Session::has($postKey))
         {
@@ -23,7 +25,7 @@ class PostController extends Controller
             Session::put($postKey,1);
         }
 
-        return view('post',compact('post','randomPost','categories'));
+        return view('post',compact('post','randomPost','categories','comments'));
     }
 
     public function allPost()

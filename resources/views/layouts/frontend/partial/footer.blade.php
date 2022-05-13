@@ -38,11 +38,6 @@
 					<div class="footer-section">
 
 						<h4 class="title"><b>SUBSCRIBE</b></h4>
-						@if(session()->has('success'))
-							<div class="alert alert-success">
-								{{ session()->get('success') }}
-							</div>
-						@endif
 							@if ($errors->any())
 								<div class="alert text-danger" style="padding-left: 0px;margin-bottom: 0px;">
 									

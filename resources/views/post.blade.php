@@ -5,9 +5,10 @@
 <link href="{{asset('frontend/css/post/responsive.css')}}" rel="stylesheet">
 
 <style>
-    .favorite_post{
+    .favorite_post {
         color: blue;
     }
+
 </style>
 @endsection
 
@@ -33,7 +34,8 @@
                         <div class="post-info">
 
                             <div class="left-area">
-                                <a class="avatar" href="#"><img src="{{asset('storage/user/'.$post->user->image)}}" alt="Profile Image"></a>
+                                <a class="avatar" href="#"><img src="{{asset('storage/user/'.$post->user->image)}}"
+                                        alt="Profile Image"></a>
                             </div>
 
                             <div class="middle-area">
@@ -45,13 +47,14 @@
 
                         <h3 class="title"><a href="#"><b>{{$post->title}}</b></a></h3>
 
-                        <div class="post-image"><img src="{{asset('storage/post/'.$post->image)}}" alt="Blog Image"></div>
+                        <div class="post-image"><img src="{{asset('storage/post/'.$post->image)}}" alt="Blog Image">
+                        </div>
 
                         <p class="para">{!! $post->body !!}</p>
 
                         <ul class="tags">
                             @foreach ($post->tags as $post_tag)
-                                <li><a href="{{$post_tag->slug}}">{{$post_tag->name}}</a></li>
+                            <li><a href="{{$post_tag->slug}}">{{$post_tag->name}}</a></li>
                             @endforeach
                         </ul>
                     </div><!-- blog-post-inner -->
@@ -61,19 +64,21 @@
                             <li>
 
                                 @guest
-                                    
-                                <a href="javascript:void(0);" onclick="toastr['info']('To Add Favorite Post You need to login first !')"><i class="ion-heart"></i>{{$post->favorite_to_user()->count()}}</a>
-                             @else
-                                <a href="javascript:void(0);" onclick="document.getElementById('favorite-form-{{$post->id}}').submit();"
-                                    
-                                    class="{{Auth::user()->favorite_to_post()->where('post_id',$post->id)->count() != 0 ? 'favorite_post' : '' }}"
 
-                                    ><i class="ion-heart"></i>{{$post->favorite_to_user()->count()}}</a>
-                                <form id="favorite-form-{{$post->id}}" action="{{route('favorite.post',[$post->id])}}" method="post" style="display: none;">
+                                <a href="javascript:void(0);"
+                                    onclick="toastr['info']('To Add Favorite Post You need to login first !')"><i
+                                        class="ion-heart"></i>{{$post->favorite_to_user()->count()}}</a>
+                                @else
+                                <a href="javascript:void(0);"
+                                    onclick="document.getElementById('favorite-form-{{$post->id}}').submit();"
+                                    class="{{Auth::user()->favorite_to_post()->where('post_id',$post->id)->count() != 0 ? 'favorite_post' : '' }}"><i
+                                        class="ion-heart"></i>{{$post->favorite_to_user()->count()}}</a>
+                                <form id="favorite-form-{{$post->id}}" action="{{route('favorite.post',[$post->id])}}"
+                                    method="post" style="display: none;">
                                     @csrf
                                 </form>
 
-                            @endguest
+                                @endguest
 
                             </li>
                             <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
@@ -103,25 +108,22 @@
                     <div class="sidebar-area subscribe-area">
 
                         <h4 class="title"><b>SUBSCRIBE</b></h4>
-                        @if(session()->has('success'))
-							<div class="alert alert-success">
-								{{ session()->get('success') }}
-							</div>
-						@endif
-							@if ($errors->any())
-								<div class="alert text-danger" style="padding-left: 0px;margin-bottom: 0px;">
-									
-										@foreach ($errors->all() as $error)
-											<span><strong>{{ $error }}</strong></span>
-										@endforeach
-									
-								</div>
-							@endif
+                        @if ($errors->any())
+                        <div class="alert text-danger" style="padding-left: 0px;margin-bottom: 0px;">
+
+                            @foreach ($errors->all() as $error)
+                            <span><strong>{{ $error }}</strong></span>
+                            @endforeach
+
+                        </div>
+                        @endif
                         <div class="input-area">
                             <form method="POST" action="{{route('subscriber.email')}}">
                                 @csrf
-                                <input class="email-input" name="email" type="text" placeholder="Enter your email" required>
-                                <button class="submit-btn" type="submit"><i class="icon ion-ios-email-outline"></i></button>
+                                <input class="email-input" name="email" type="text" placeholder="Enter your email"
+                                    required>
+                                <button class="submit-btn" type="submit"><i
+                                        class="icon ion-ios-email-outline"></i></button>
                             </form>
                         </div>
 
@@ -132,9 +134,9 @@
                         <h4 class="title"><b>TAG CLOUD</b></h4>
                         <ul>
                             @foreach ($post->tags as $tag)
-                                <li><a href="{{$tag->slug}}">{{$tag->name}}</a></li>
+                            <li><a href="{{$tag->slug}}">{{$tag->name}}</a></li>
                             @endforeach
-                            
+
                         </ul>
 
                     </div><!-- subscribe-area -->
@@ -153,49 +155,54 @@
     <div class="container">
         <div class="row">
 
-            @foreach ($randomPost as $post)
-               <div class="col-lg-4 col-md-6">
+            @foreach ($randomPost as $posts)
+            <div class="col-lg-4 col-md-6">
                 <div class="card h-100">
                     <div class="single-post post-style-1">
 
-                        <div class="blog-image"><img src="{{asset('storage/post/'.$post->image)}}" alt="Blog Image"></div>
+                        <div class="blog-image"><img src="{{asset('storage/post/'.$posts->image)}}" alt="Blog Image">
+                        </div>
 
-                        <a class="avatar" href="#"><img src="{{asset('storage/user/'.$post->user->image)}}" alt="Profile Image"></a>
+                        <a class="avatar" href="#"><img src="{{asset('storage/user/'.$posts->user->image)}}"
+                                alt="Profile Image"></a>
 
                         <div class="blog-info">
 
-                            <h4 class="title"><a href="#"><b>{{$post->title}}</b></a></h4>
+                            <h4 class="title"><a href="{{route('post.details',[$posts->slug])}}"><b>{{$posts->title}}</b></a></h4>
 
                             <ul class="post-footer">
                                 <li>
 
                                     @guest
-                                    
-                                        <a href="javascript:void(0);" onclick="toastr['info']('To Add Favorite Post You need to login first !')"><i class="ion-heart"></i>{{$post->favorite_to_user()->count()}}</a>
-                                    @else
-                                        <a href="javascript:void(0);" onclick="document.getElementById('favorite-form-{{$post->id}}').submit();"
-                                            
-                                            class="{{Auth::user()->favorite_to_post()->where('post_id',$post->id)->count() != 0 ? 'favorite_post' : '' }}"
 
-                                            ><i class="ion-heart"></i>{{$post->favorite_to_user()->count()}}</a>
-                                        <form id="favorite-form-{{$post->id}}" action="{{route('favorite.post',[$post->id])}}" method="post" style="display: none;">
-                                            @csrf
-                                        </form>
+                                    <a href="javascript:void(0);"
+                                        onclick="toastr['info']('To Add Favorite Post You need to login first !')"><i
+                                            class="ion-heart"></i>{{$posts->favorite_to_user()->count()}}</a>
+                                    @else
+                                    <a href="javascript:void(0);"
+                                        onclick="document.getElementById('favorite-form-{{$posts->id}}').submit();"
+                                        class="{{Auth::user()->favorite_to_post()->where('post_id',$posts->id)->count() != 0 ? 'favorite_post' : '' }}"><i
+                                            class="ion-heart"></i>{{$posts->favorite_to_user()->count()}}</a>
+                                    <form id="favorite-form-{{$posts->id}}"
+                                        action="{{route('favorite.post',[$posts->id])}}" method="post"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
 
                                     @endguest
 
                                 </li>
                                 <li><a href="#"><i class="ion-chatbubble"></i>6</a></li>
-                                <li><a href="#"><i class="ion-eye"></i>{{$post->view_count}}</a></li>
+                                <li><a href="#"><i class="ion-eye"></i>{{$posts->view_count}}</a></li>
                             </ul>
 
                         </div><!-- blog-info -->
                     </div><!-- single-post -->
                 </div><!-- card -->
             </div><!-- col-md-6 col-sm-12 -->
- 
+
             @endforeach
-            
+
 
         </div><!-- row -->
 
@@ -209,21 +216,16 @@
 
             <div class="col-lg-8 col-md-12">
                 <div class="comment-form">
-                    <form method="post">
+                    @guest
+                    <b>For Comment you have to <a href="{{route('login')}}">Login</a> first</b>
+                    @else
+                    <form method="post" action="{{route('comment.store',[$post->id])}}">
+                        @csrf
                         <div class="row">
-
-                            <div class="col-sm-6">
-                                <input type="text" aria-required="true" name="contact-form-name" class="form-control"
-                                    placeholder="Enter your name" aria-invalid="true" required >
-                            </div><!-- col-sm-6 -->
-                            <div class="col-sm-6">
-                                <input type="email" aria-required="true" name="contact-form-email" class="form-control"
-                                    placeholder="Enter your email" aria-invalid="true" required>
-                            </div><!-- col-sm-6 -->
-
                             <div class="col-sm-12">
-                                <textarea name="contact-form-message" rows="2" class="text-area-messge form-control"
-                                    placeholder="Enter your comment" aria-required="true" aria-invalid="false"></textarea >
+                                <textarea name="comment" rows="2" class="text-area-messge form-control"
+                                    placeholder="Enter your comment" aria-required="true"
+                                    aria-invalid="false"></textarea>
                             </div><!-- col-sm-12 -->
                             <div class="col-sm-12">
                                 <button class="submit-btn" type="submit" id="form-submit"><b>POST COMMENT</b></button>
@@ -231,91 +233,35 @@
 
                         </div><!-- row -->
                     </form>
+                    @endguest
+
                 </div><!-- comment-form -->
 
-                <h4><b>COMMENTS(12)</b></h4>
+                <h4><b>COMMENTS({{$post->comments->count()}})</b></h4>
 
                 <div class="commnets-area">
 
+                    @foreach ($comments as $comment)
                     <div class="comment">
 
                         <div class="post-info">
 
                             <div class="left-area">
-                                <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
+                                <a class="avatar" href="#"><img src="{{asset('storage/user/'.$comment->user->image)}}"
+                                        alt="Profile Image"></a>
                             </div>
 
                             <div class="middle-area">
-                                <a class="name" href="#"><b>Katy Liu</b></a>
-                                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-                            </div>
-
-                            <div class="right-area">
-                                <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
+                                <a class="name" href="#"><b>{{$comment->user->name}}</b></a>
+                                <h6 class="date">{{$comment->created_at->diffForHumans()}}</h6>
                             </div>
 
                         </div><!-- post-info -->
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                            Ut enim ad minim veniam</p>
+                        <p>{{$comment->comment}}</p>
 
                     </div>
-
-                    <div class="comment">
-                        <h5 class="reply-for">Reply for <a href="#"><b>Katy Lui</b></a></h5>
-
-                        <div class="post-info">
-
-                            <div class="left-area">
-                                <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-                            </div>
-
-                            <div class="middle-area">
-                                <a class="name" href="#"><b>Katy Liu</b></a>
-                                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-                            </div>
-
-                            <div class="right-area">
-                                <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-                            </div>
-
-                        </div><!-- post-info -->
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                            Ut enim ad minim veniam</p>
-
-                    </div>
-
-                </div><!-- commnets-area -->
-
-                <div class="commnets-area ">
-
-                    <div class="comment">
-
-                        <div class="post-info">
-
-                            <div class="left-area">
-                                <a class="avatar" href="#"><img src="images/avatar-1-120x120.jpg" alt="Profile Image"></a>
-                            </div>
-
-                            <div class="middle-area">
-                                <a class="name" href="#"><b>Katy Liu</b></a>
-                                <h6 class="date">on Sep 29, 2017 at 9:48 am</h6>
-                            </div>
-
-                            <div class="right-area">
-                                <h5 class="reply-btn" ><a href="#"><b>REPLY</b></a></h5>
-                            </div>
-
-                        </div><!-- post-info -->
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-                            Ut enim ad minim veniam</p>
-
-                    </div>
+                    @endforeach
 
                 </div><!-- commnets-area -->
 
