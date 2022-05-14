@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->take(6)->get();
+        $posts = Post::latest()->publish()->status()->take(6)->get();
         $categories = Category::all();
         return view('welcome',compact('categories','posts'));
     }

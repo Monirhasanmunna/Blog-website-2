@@ -14,8 +14,8 @@ class PostController extends Controller
     public function index($slug)
     {
 
-        $post = Post::where('slug',$slug)->first();
-        $randomPost = Post::inRandomOrder()->limit(3)->get();
+        $post = Post::where('slug',$slug)->publish()->status()->first();
+        $randomPost = Post::inRandomOrder()->publish()->status()->limit(3)->get();
         $comments = $post->comments()->get();
         $postKey = 'Post'.$post->id;
         if(!Session::has($postKey))
@@ -30,7 +30,7 @@ class PostController extends Controller
     public function allPost()
     {
         $categories = Category::all();
-        $posts = Post::latest()->paginate(10);
+        $posts = Post::latest()->publish()->status()->paginate(10);
         return view('posts',compact('posts','categories'));
 
     }
@@ -38,14 +38,14 @@ class PostController extends Controller
     public function PostByCategory($slug)
     {
         $categories = Category::all();
-        $posts = Category::where('slug',$slug)->first();
+        $posts = Category::where('slug',$slug)->publish()->status()->first();
         return view('categoryPost',compact('posts','categories'));
     }
 
     public function PostByTag($slug)
     {
         $categories = Category::all();
-        $posts = Tag::where('slug',$slug)->first();
+        $posts = Tag::where('slug',$slug)->publish()->status()->first();
         return view('tagPost',compact('posts','categories'));
     }
 }

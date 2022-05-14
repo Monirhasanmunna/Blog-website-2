@@ -35,4 +35,14 @@ class Post extends Model
     {
         return $this->hasMany('App\Comment');
     }
+
+    public function scopePublish($query)
+    {
+        $query->where('is_approved', 1);
+    }
+
+    public function scopeStatus($query)
+    {
+        $query->where('status', 1);
+    }
 }
