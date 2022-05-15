@@ -9,7 +9,11 @@
 			<li><a href="{{route('home')}}">Home</a></li>
 			<li><a href="{{route('post.all')}}">Post</a></li>
 			@guest
+			@if (Request::is('login'))
+			<li><a href="{{route('register')}}">Registration</a></li>
+			@else
 			<li><a href="{{route('login')}}">Login</a></li>
+			@endif
 			@else
 				@if (Auth::id() == 1)
 				<li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>

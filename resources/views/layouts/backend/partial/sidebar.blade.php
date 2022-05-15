@@ -2,7 +2,7 @@
     <!-- User Info -->
     <div class="user-info">
         <div class="image">
-            <img src="{{asset('storage/user/'.Auth::user()->image)}}" width="48" height="48" alt="User" />
+            <img src="{{isset(Auth::user()->image) ? asset('storage/user/'.Auth::user()->image) : ''}}" width="48" height="48" alt="User" />
         </div>
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}</div>
@@ -73,6 +73,13 @@
                 <a href="{{route('admin.post.pending')}}">
                     <i class="material-icons">speaker_notes</i>
                     <span>Pending_Post</span>
+                </a>
+            </li>
+
+            <li class="{{Request::is('admin/author/list') ? 'active' : ''}}">
+                <a href="{{route('admin.author.list')}}">
+                    <i class="material-icons">people_alt</i>
+                    <span>Author List</span>
                 </a>
             </li>
 

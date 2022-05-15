@@ -14,7 +14,7 @@ Route::get('category/{slug}/post','PostController@PostByCategory')->name('catego
 Route::get('tag/{slug}/post','PostController@PostByTag')->name('tag.post');
 Route::get('search','SearchController@search')->name('search');
 
-
+//Auth middleware route
 Route::group(['middleware'=>['auth']] , function(){
     Route::post('favorite/{post}/add','FavoriteController@add')->name('favorite.post');
     Route::post('post/comment/{post}','CommentController@store')->name('comment.store');
@@ -38,6 +38,9 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::get('favorite','FavoriteController@index')->name('favorite.index');
     Route::get('favorite/{post}/details','FavoriteController@show')->name('favorite.show');
     Route::delete('favorite/{post}/delete','FavoriteController@destroy')->name('favorite.destroy');
+    Route::get('author/list','AuthorListController@index')->name('author.list');
+    Route::get('author/details','AuthorListController@show')->name('author.show');
+    Route::get('author/destroy','AuthorListController@destroy')->name('author.destroy');
     
 });
 
