@@ -38,7 +38,7 @@
                 </div>
                 <div class="content">
                     <div class="text">Total Comments</div>
-                    <div class="number count-to" data-from="0" data-to="{{$comments->comments->count()}}" data-speed="1000" data-fresh-interval="20"></div>
+                    <div class="number count-to" data-from="0" data-to="{{$comments->count()}}" data-speed="1000" data-fresh-interval="20"></div>
                 </div>
             </div>
         </div>

@@ -12,10 +12,10 @@ class DashboardController extends Controller
 {
     public function index(){
 
-        $user = Auth::user();
+        $user = Auth::User();
         $post = Post::publish()->get();
         $userPost = $user->posts()->publish()->get();
-        $comments = $user->posts()->first();
+        $comments = Comment::all();     //$user->posts()->first();
         $pendingPost = $user->posts()->where('is_approved', 0)->get();
         return view('author.dashboard',compact('post','userPost','comments','pendingPost'));
         

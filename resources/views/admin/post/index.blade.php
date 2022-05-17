@@ -104,6 +104,7 @@
      <script src="{{asset('backend/plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
 
      <script src="{{asset('backend/js/pages/tables/jquery-datatable.js')}}"></script>
+     
 @endsection
 
 @endsection
