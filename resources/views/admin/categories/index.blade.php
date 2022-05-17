@@ -38,7 +38,7 @@
                         <tr role="row" class="odd"  class="text-center">
 
                                 <td class="text-center" class="sorting_1">{{$i++}}</td>
-                                <td class="text-center"><img src="{{Storage::url('app/public/category/'.$category->image)}}" alt=""></td>
+                                <td class="text-center"><img style="width: 65px;" src="{{asset('storage/category/slider/'.$category->image)}}" alt=""></td>
                                 <td class="text-center">{{$category->name}}</td>
                                 <td class="text-center">{{$category->posts->count()}}</td>
                                 <td class="text-center">{{date_format($category->created_at,'M d Y')}}</td>
